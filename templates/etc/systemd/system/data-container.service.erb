@@ -7,9 +7,10 @@ After=docker.service<% if @depends %><% @depends.each do |dep| %><%= " #{dep}.se
 Type=oneshot
 Restart=no
 RemainAfterExit=yes
+Environment="<%= @title %>_DOCKER_IMAGE=<%= @image %>"
 ExecStart=-/usr/bin/docker run \
     <%= @docker_run_options %> \
-    <%= @image %>
+    $<%= @title %>_DOCKER_IMAGE
 ExecStop=/usr/bin/docker stop <%= @title %>
 
 [Install]
