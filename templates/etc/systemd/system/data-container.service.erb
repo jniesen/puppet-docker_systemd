@@ -8,8 +8,9 @@ Type=oneshot
 Restart=no
 RemainAfterExit=yes
 Environment="<%= @title %>_DOCKER_IMAGE=<%= @image %>"
+Environment="<%= @title %>_DOCKER_RUN_OPTS=<%= @docker_run_options %>"
 ExecStart=-/usr/bin/docker run \
-    <%= @docker_run_options %> \
+    $<%= @title %>_DOCKER_RUN_OPTS \
     $<%= @title %>_DOCKER_IMAGE
 ExecStop=/usr/bin/docker stop <%= @title %>
 
